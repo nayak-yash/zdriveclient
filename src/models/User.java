@@ -1,6 +1,8 @@
 package models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String name;
     String userName;
     String email;
@@ -37,14 +39,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    int id;
 }

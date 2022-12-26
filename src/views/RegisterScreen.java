@@ -97,7 +97,6 @@ public class RegisterScreen extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String password=String.valueOf(passwordField.getPassword()).trim();
         String confirmPassword=String.valueOf(confirmPasswordField.getPassword()).trim();
-        String email=emailField.getText();
         if(!password.equals(confirmPassword)){
             JOptionPane.showMessageDialog(null,"Password and Confirm Password are not same!!","Alert",JOptionPane.WARNING_MESSAGE);
         }
@@ -105,10 +104,9 @@ public class RegisterScreen extends JFrame implements ActionListener {
             User user = new User();
             user.setName(nameField.getText().trim());
             user.setUserName(usernameField.getText().trim());
-            user.setEmail(email);
+            user.setEmail(emailField.getText().trim());
             user.setPassword(password);
-            ZDriveClient zDriveClient=new ZDriveClient();
-            boolean result = zDriveClient.registerPrompt(user);
+            boolean result = new ZDriveClient().registerPrompt(user);
             if(result){
                 dispose();
             }

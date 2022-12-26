@@ -2,12 +2,11 @@ package views;
 
 
 import controller.ZDriveClient;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
+import java.io.File;
 
 public class LoginScreen extends JFrame implements ActionListener {
     private JPanel signInPanel;
@@ -65,10 +64,9 @@ public class LoginScreen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-         ZDriveClient zDriveClient=new ZDriveClient();
-        Long userId=zDriveClient.loginPrompt(usernameField.getText().toString(), String.valueOf(passwordField.getPassword()).trim());
-        if(userId!=null){
-            MainScreen mainScreen=new MainScreen(userId);
+        File root =new ZDriveClient().loginPrompt(usernameField.getText().toString(), String.valueOf(passwordField.getPassword()).trim());
+        if(root!=null){
+            MainScreen mainScreen=new MainScreen(root);
             dispose();
         }
         else{
@@ -76,5 +74,8 @@ public class LoginScreen extends JFrame implements ActionListener {
             passwordField.setText("");
             JOptionPane.showMessageDialog(null,"Login Failed!!","Alert",JOptionPane.WARNING_MESSAGE);
         }
+    }
+    public static void main(String[] args) {
+        LoginScreen loginScreen= new LoginScreen();
     }
 }
