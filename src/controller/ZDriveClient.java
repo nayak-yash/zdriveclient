@@ -121,4 +121,76 @@ public class ZDriveClient {
         }
         return renewed;
     }
+    public File pastePrompt(File dir, File item){
+        File renewed = null;
+        REQUEST_CODE=6;
+        try {
+            DataOutputStream dataOutputStream=new DataOutputStream(os);
+            dataOutputStream.writeInt(REQUEST_CODE);
+            ObjectOutputStream oos=new ObjectOutputStream(os);
+            oos.writeObject(dir);
+            oos.flush();
+            oos.writeObject(item);
+            oos.flush();
+            ObjectInputStream ois=new ObjectInputStream(is);
+            renewed=(File)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return renewed;
+    }
+    public File movePrompt(File dir, File item){
+        File renewed = null;
+        REQUEST_CODE=7;
+        try {
+            DataOutputStream dataOutputStream=new DataOutputStream(os);
+            dataOutputStream.writeInt(REQUEST_CODE);
+            ObjectOutputStream oos=new ObjectOutputStream(os);
+            oos.writeObject(dir);
+            oos.flush();
+            oos.writeObject(item);
+            oos.flush();
+            ObjectInputStream ois=new ObjectInputStream(is);
+            renewed=(File)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return renewed;
+    }
+    public File deletePrompt(File item){
+        File renewed = null;
+        REQUEST_CODE=8;
+        try {
+            DataOutputStream dataOutputStream=new DataOutputStream(os);
+            dataOutputStream.writeInt(REQUEST_CODE);
+            ObjectOutputStream oos=new ObjectOutputStream(os);
+            oos.writeObject(item.getParentFile());
+            oos.flush();
+            oos.writeObject(item);
+            oos.flush();
+            ObjectInputStream ois=new ObjectInputStream(is);
+            renewed=(File)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return renewed;
+    }
+
+    public File renamePrompt(File item, String newName) {
+        File renewed = null;
+        REQUEST_CODE=9;
+        try {
+            DataOutputStream dataOutputStream=new DataOutputStream(os);
+            dataOutputStream.writeInt(REQUEST_CODE);
+            ObjectOutputStream oos=new ObjectOutputStream(os);
+            oos.writeObject(item);
+            oos.flush();
+            dataOutputStream.writeUTF(newName);
+            ObjectInputStream ois=new ObjectInputStream(is);
+            renewed=(File)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return renewed;
+    }
 }
