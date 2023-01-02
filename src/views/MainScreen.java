@@ -30,9 +30,6 @@ public class MainScreen extends JFrame implements ActionListener {
     private static ImageIcon iconFolder=new ImageIcon("C:\\Users\\shark\\IdeaProjects\\ZDriveClient\\src\\ic_folder.png");
     private static Font font=new Font("Cascadia Code", Font.BOLD, 15);
     private int status = 0;
-    public static void main(String[] args) {
-        new MainScreen(new File("D:"));
-    }
     public MainScreen(File file){
         setTitle("ZDrive");
         setSize(800,500);
